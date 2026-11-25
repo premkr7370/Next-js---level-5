@@ -1,0 +1,296 @@
+# Next.js Level 5
+
+A Next.js 15 learning project that demonstrates basic App Router concepts and JSON API routes. The project currently contains a minimal page and three backend route handlers for user data, search queries, and dynamic post IDs.
+
+## Overview
+
+This project is a compact example for learning how to:
+
+- Build pages with the Next.js App Router
+- Return JSON responses from Route Handlers
+- Handle `GET` and `POST` HTTP methods
+- Read URL search parameters
+- Define dynamic API routes
+- Apply global styles with Tailwind CSS
+- Use TypeScript and strict type checking
+
+The root page is currently a minimal empty React component. The API routes are the main implemented functionality.
+
+## Technology Stack
+
+| Technology | Version | Purpose |
+| --- | --- | --- |
+| Next.js | 15.5.4 | Framework and App Router |
+| React | 19.1.0 | UI components |
+| React DOM | 19.1.0 | React rendering |
+| TypeScript | 5.x | Static type checking |
+| Tailwind CSS | 4.x | Utility-first styling |
+| ESLint | 9.x | Code linting |
+
+The project uses Next.js's Turbopack-powered development and build commands.
+
+## Features
+
+### `/` - Home page
+
+- Rendered through `src/app/page.tsx`
+- Uses the shared layout from `src/app/layout.tsx`
+- Loads the Geist Sans and Geist Mono fonts
+- Includes global Tailwind CSS and dark-mode-aware default styles
+- Displays no content yet; it is ready for additional UI work
+
+### `/api/user` - User API
+
+- `GET` returns a fixed user object
+- `POST` accepts a JSON request body and echoes back `name` and `age`
+
+### `/api/search` - Search query API
+
+- Reads the `q` URL query parameter
+- Returns the value through a JSON response
+
+### `/api/post/[id]` - Dynamic post API
+
+- Uses a dynamic route segment named `id`
+- Returns the supplied post ID as a JSON response
+
+## Getting Started
+
+### Prerequisites
+
+Install:
+
+- Node.js 18.18 or newer
+- npm, which is included with Node.js
+
+### Installation
+
+From the project directory, install dependencies:
+
+```bash
+npm install
+```
+
+### Run the Development Server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+Next.js watches the source files and reloads changes automatically. The development server uses Turbopack.
+
+### Production Build
+
+Create an optimized production build:
+
+```bash
+npm run build
+```
+
+Start the production server:
+
+```bash
+npm run start
+```
+
+The production server defaults to [http://localhost:3000](http://localhost:3000).
+
+### Run the Linter
+
+```bash
+npm run lint
+```
+
+## API Reference
+
+All API routes return JSON. They do not currently require authentication and do not connect to a database.
+
+### Get a sample user
+
+```http
+GET /api/user
+```
+
+Example response:
+
+```json
+{
+  "name": "ayush",
+  "age": 21
+}
+```
+
+Example with `curl`:
+
+```bash
+curl http://localhost:3000/api/user
+```
+
+### Create or echo user data
+
+```http
+POST /api/user
+Content-Type: application/json
+```
+
+Request body:
+
+```json
+{
+  "name": "Ayush",
+  "age": 22
+}
+```
+
+Example response:
+
+```json
+{
+  "name": "Ayush",
+  "age": 22
+}
+```
+
+Example with `curl`:
+
+```bash
+curl -X POST http://localhost:3000/api/user \
+  -H "Content-Type: application/json" \
+  -d "{\"name\":\"Ayush\",\"age\":22}"
+```
+
+### Search
+
+```http
+GET /api/search?q=nextjs
+```
+
+Example response:
+
+```json
+{
+  "query": "nextjs"
+}
+```
+
+Without a `q` parameter, `query` is `null`.
+
+Example with `curl`:
+
+```bash
+curl "http://localhost:3000/api/search?q=nextjs"
+```
+
+### Get a dynamic post ID
+
+```http
+GET /api/post/[id]
+```
+
+Replace `[id]` with a post identifier:
+
+```http
+GET /api/post/42
+```
+
+Example response:
+
+```json
+{
+  "postId": "42"
+}
+```
+
+Example with `curl`:
+
+```bash
+curl http://localhost:3000/api/post/42
+```
+
+## Project Structure
+
+```text
+.
+├── public/                 # Static assets
+├── src/
+│   └── app/
+│       ├── api/
+│       │   ├── post/[id]/route.ts
+│       │   ├── search/route.ts
+│       │   └── user/route.ts
+│       ├── favicon.ico
+│       ├── globals.css     # Tailwind import and base styles
+│       ├── layout.tsx      # Shared root layout and metadata
+│       └── page.tsx        # Home page
+├── eslint.config.mjs       # ESLint configuration
+├── next.config.ts          # Next.js configuration
+├── package.json
+├── postcss.config.mjs      # Tailwind/PostCSS configuration
+└── tsconfig.json           # TypeScript configuration
+```
+
+## Configuration
+
+### TypeScript
+
+The project uses strict TypeScript mode. Source imports can use the configured `@/*` alias, which maps to `src/*`.
+
+### Styling
+
+`src/app/globals.css` imports Tailwind CSS and defines:
+
+- Light and dark root color variables
+- Geist font variables
+- Default body background and foreground colors
+- Automatic colors based on `prefers-color-scheme`
+
+### Metadata
+
+The default layout currently sets:
+
+- Title: `Create Next App`
+- Description: `Generated by create next app`
+
+Update `metadata` in `src/app/layout.tsx` when customizing the application.
+
+### Environment Variables
+
+No environment variables are currently required. Files matching `.env*` are ignored by Git; add only the variables your implementation needs and provide an appropriate example file if more configuration is introduced.
+
+## Development Notes
+
+- The API routes use `NextRequest` and `NextResponse`.
+- `POST /api/user` has no validation or persistence layer.
+- `GET /api/search` reads the `q` parameter with `request.nextUrl.searchParams`.
+- `GET /api/post/[id]` demonstrates a dynamic route segment.
+- The API data is intentionally static or request-driven; no database, ORM, or external service is configured.
+- There are no automated test scripts configured in `package.json`.
+
+## Useful Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the Turbopack development server |
+| `npm run build` | Create a production build |
+| `npm run start` | Start the production server |
+| `npm run lint` | Run ESLint |
+
+## Deployment
+
+This project can be deployed anywhere that supports Next.js applications.
+
+For a Vercel deployment:
+
+1. Push the project to a Git repository.
+2. Import the repository in Vercel.
+3. Use the project root as the application directory.
+4. Keep the default framework settings; no environment variables are currently required.
+
+Alternatively, build and run it on a Node.js server:
+
+```bash
+npm run build
+npm run start
+```
