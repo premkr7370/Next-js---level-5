@@ -1,60 +1,73 @@
-# Next.js Level 5
+# <span>⚡</span> Next.js Level 5
 
-A Next.js 15 learning project that demonstrates basic App Router concepts and JSON API routes. The project currently contains a minimal page and three backend route handlers for user data, search queries, and dynamic post IDs.
+<div align="center">
 
-## Overview
+![Next.js](https://img.shields.io/badge/Next.js-15.5.4-black?logo=nextdotjs)
+![React](https://img.shields.io/badge/React-19.1.0-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?logo=tailwindcss&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+**A beginner-friendly Next.js App Router and JSON API learning project**
+
+</div>
+
+<p align="center">
+  <img src="./public/next-level-demo.gif" alt="Next.js API demo" width="760">
+</p>
+
+---
+
+## 🎯 Overview
 
 This project is a compact example for learning how to:
 
-- Build pages with the Next.js App Router
+- Build pages with the Next.js **App Router**
 - Return JSON responses from Route Handlers
 - Handle `GET` and `POST` HTTP methods
-- Read URL search parameters
-- Define dynamic API routes
-- Apply global styles with Tailwind CSS
-- Use TypeScript and strict type checking
+- Read URL query parameters
+- Create dynamic API routes
+- Use TypeScript with strict type checking
+- Apply Tailwind CSS globally
 
-The root page is currently a minimal empty React component. The API routes are the main implemented functionality.
+> 🚧 The home page is currently minimal, while the API routes provide the main implemented functionality.
 
-## Technology Stack
+## 🧰 Technology Stack
 
 | Technology | Version | Purpose |
 | --- | --- | --- |
-| Next.js | 15.5.4 | Framework and App Router |
-| React | 19.1.0 | UI components |
-| React DOM | 19.1.0 | React rendering |
-| TypeScript | 5.x | Static type checking |
-| Tailwind CSS | 4.x | Utility-first styling |
-| ESLint | 9.x | Code linting |
+| Next.js | `15.5.4` | Framework and App Router |
+| React | `19.1.0` | UI components |
+| React DOM | `19.1.0` | React rendering |
+| TypeScript | `5.x` | Static type checking |
+| Tailwind CSS | `4.x` | Utility-first styling |
+| ESLint | `9.x` | Code linting |
 
-The project uses Next.js's Turbopack-powered development and build commands.
+## ✨ Features
 
-## Features
+| Route | Description |
+| --- | --- |
+| `/` | Shared layout and minimal home page |
+| `/api/user` | Fixed user data or echoed JSON body |
+| `/api/search` | Read a `q` query parameter |
+| `/api/post/[id]` | Return a dynamic post identifier |
 
-### `/` - Home page
-
-- Rendered through `src/app/page.tsx`
-- Uses the shared layout from `src/app/layout.tsx`
-- Loads the Geist Sans and Geist Mono fonts
-- Includes global Tailwind CSS and dark-mode-aware default styles
-- Displays no content yet; it is ready for additional UI work
-
-### `/api/user` - User API
+### 👤 `/api/user`
 
 - `GET` returns a fixed user object
-- `POST` accepts a JSON request body and echoes back `name` and `age`
+- `POST` accepts a JSON body and echoes `name` and `age`
 
-### `/api/search` - Search query API
+### 🔎 `/api/search`
 
 - Reads the `q` URL query parameter
-- Returns the value through a JSON response
+- Returns `null` when `q` is not provided
 
-### `/api/post/[id]` - Dynamic post API
+### 🆔 `/api/post/[id]`
 
 - Uses a dynamic route segment named `id`
 - Returns the supplied post ID as a JSON response
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
